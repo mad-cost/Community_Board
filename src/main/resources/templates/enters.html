@@ -6,13 +6,13 @@
 </head>
 <body>
 <div>
-  <a href="/enters">전체 게시판</a>
+  <a href="/enters">전체 게시글</a>
   <a th:each="enter : ${enters}" th:href="@{'/enters/'+${enter.id}}">
     [[${enter.name}]]</a>
 </div>
 <hr>
 <div>
-  <h1 th:if="${selected == null}">전체 게시판</h1>
+  <h1 th:if="${selected == null}">전체 게시글</h1>
   <h1 th:unless="${selected == null}">[[${selected.name}]]</h1>
   <a th:if="${selected != null && selected.id == 1}" href="https://hybecorp.com/kor/main" target='_blank'>Corporation</a>
   <a th:if="${selected != null && selected.id == 2}" href="https://www.smtown.com/" target='_blank'>Corporation</a>
@@ -20,32 +20,31 @@
   <a th:if="${selected != null && selected.id == 4}" href="https://www.ygfamily.com/ko/main" target='_blank'>Corporation</a>
 
   <br>
-  <a href="/article/new">Write</a>
+  <a href="/articles/new">Write</a>
 </div>
 <hr>
-<a th:each="article : ${articles}">[[${article.id}]]<br></a>
-
-<!--<h2 th:if="${articles.isEmpty()}">-->
-<!--  No Articles-->
-<!--</h2>-->
-<!--<table th:unless="${articles.isEmpty()}">-->
-<!--  <thead>-->
-<!--  <tr>-->
-<!--    <th scope="col">#</th>-->
-<!--    <th scope="col">Title</th>-->
-<!--    <th th:if="${selected == null}" scope="col">Board</th>-->
-<!--  </tr>-->
-<!--  </thead>-->
-<!--  <tbody>-->
-<!--  <tr th:each="article: ${articles}">-->
-<!--    <th scope="col" th:text="${article.id}"></th>-->
-<!--    <th scope="col">-->
-<!--      <a th:href="@{/article/{id}(id=${article.id})}" th:text="${article.title}"></a>-->
-<!--    </th>-->
-<!--    <th th:if="${selected == null}" scope="col" th:text="${article.boardName}"></th>-->
-<!--  </tr>-->
-<!--  </tbody>-->
-<!--</table>-->
-
+<h2 th:if="${articles.isEmpty()}">
+  No Articles
+</h2>
+<table th:unless="${articles.isEmpty()}">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Title</th>
+    <th th:if="${selected == null}" scope="col">Company</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="article: ${articles}">
+    <th scope="col" th:text="${article.id}"></th>
+    <th scope="col">
+      <a th:href="@{'/article/'+${article.id}}" th:text="${article.title}"></a>
+    </th>
+    <td th:if="${selected == null}">
+      <span th:each="enter : ${enters}" th:if="${article.enterId == enter.id}" th:text="${enter.name}"></span>
+    </td>
+  </tr>
+  </tbody>
+</table>
 </body>
 </html>

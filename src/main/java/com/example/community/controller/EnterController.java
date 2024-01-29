@@ -26,7 +26,7 @@ public class EnterController {
     return "enters";
   }
 
-  @GetMapping("/{id}")
+  @GetMapping("/{id}") //1
   public String listOneEnter(
           @PathVariable("id")
           Long enterId,
@@ -34,6 +34,7 @@ public class EnterController {
   ){
     model.addAttribute("enters", enterService.readAll());
     model.addAttribute("selected", enterService.readOne(enterId));
+    model.addAttribute("articles", articleService.readArticleEnterIdDesc(enterId));
 
     return "enters";
   }
