@@ -26,7 +26,7 @@ public class EnterController {
     return "enters";
   }
 
-  @GetMapping("/{id}") //1
+  @GetMapping("/{id}")
   public String listOneEnter(
           @PathVariable("id")
           Long enterId,

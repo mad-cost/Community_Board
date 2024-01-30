@@ -27,7 +27,7 @@ public class ArticleDto {
             entity.getTitle(),
             entity.getContent(),
             entity.getPassword(),
-            entity.getEnterId()
+            entity.getEnter().getId()
     );
   }
 
