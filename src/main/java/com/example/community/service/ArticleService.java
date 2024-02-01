@@ -50,4 +50,12 @@ public class ArticleService {
     return ArticleDto.from(articleRepository.findById(id)
             .orElseThrow());
   }
+
+  public void delete(Long id, String password){
+    Article article = articleRepository.findById(id)
+            .orElseThrow();
+    if (article.getPassword().equals(password)){
+      articleRepository.delete(article);
+    }
+  }
 }

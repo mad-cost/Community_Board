@@ -53,6 +53,16 @@ public class ArticleController {
           model.addAttribute("commets", commentService.readComments(id));
           return "/article/read";
   }
+  @PostMapping("/{articleId}/delete")
+  public String deleteArticle(
+          @PathVariable("articleId")
+          Long articleId,
+          @RequestParam
+          String password
+  ){
+    articleService.delete(articleId, password);
+    return "redirect:/enters";
+  }
 
 
 }
