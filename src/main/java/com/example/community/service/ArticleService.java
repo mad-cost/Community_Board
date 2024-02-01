@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -45,4 +46,8 @@ public class ArticleService {
     return ArticleDto.from(articleRepository.save(article));
   }
 
+  public ArticleDto readArticle(Long id){
+    return ArticleDto.from(articleRepository.findById(id)
+            .orElseThrow());
+  }
 }

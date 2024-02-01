@@ -6,10 +6,7 @@ import com.example.community.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/articles")
@@ -39,4 +36,16 @@ public class ArticleController {
           ArticleDto newId = articleService.create(title, content, password, enterId);
           return "redirect:/articles/" + newId.getId();
   }
+
+  @GetMapping("/{articleId}")
+  public String readArticle(
+          @PathVariable("articleId")
+          Long id,
+          Model model
+  ){
+          model.addAttribute("article", articleService.readArticle(id));
+          return "/article/read";
+  }
+
+
 }

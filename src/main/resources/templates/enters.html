@@ -38,7 +38,7 @@
   <tr th:each="article: ${articles}">
     <th scope="col" th:text="${article.id}"></th>
     <th scope="col">
-      <a th:href="@{'/article/'+${article.id}}" th:text="${article.title}"></a>
+      <a th:href="@{'/articles/'+${article.enterId}}" th:text="${article.title}"></a>
     </th>
     <td th:if="${selected == null}">
       <span th:each="enter : ${enters}" th:if="${article.enterId == enter.id}" th:text="${enter.name}"></span>
