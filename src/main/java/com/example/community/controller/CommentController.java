@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/articles/{articleId}/comment")
+@RequestMapping("/articles/{articleId}/comments")
 @RequiredArgsConstructor
 public class CommentController {
   private final CommentService commentService;
@@ -18,14 +18,27 @@ public class CommentController {
   @PostMapping
   public String createComment(
      @PathVariable("articleId")
-     Long id,
+     Long articleId,
      @RequestParam("content")
      String content,
      @RequestParam("password")
      String password
   ){
-    CommentDto comment = commentService.creatComment(id, content, password);
+    CommentDto comment = commentService.creatComment(articleId, content, password);
     return "redirect:/articles/" + comment.getArticleId();
+  }
+
+  @PostMapping("/{commentId}/delete")
+  public String deleteComment(
+          @PathVariable("articleId")
+          Long articleId,
+          @PathVariable("commentId")
+          Long commentId,
+          @RequestParam("password")
+          String password
+  ){
+      commentService.deleteComment(commentId, password);
+      return "redirect:/articles/" + articleId;
   }
 
 }

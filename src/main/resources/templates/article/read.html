@@ -20,9 +20,8 @@
 </p>
 <hr>
 
-<!-- 101-->
 <h5>댓글 달기</h5>
-<form th:action="@{'/articles/'+${article.id}+'/comment'}" method="post">
+<form th:action="@{'/articles/'+${article.id}+'/comments'}" method="post">
   <div>
     <label for="password-input">Password</label>
     <input type="password" name="password" id="password-input">
@@ -33,16 +32,16 @@
   </div>
   <input type="submit" value="작성">
 </form>
-
-
 <hr>
-<div th:if="${commets.isEmpty()}"><h3>댓글이 없습니다.</h3></div>
+<!---------------->
+<div th:if="${comments.isEmpty()}"><h3>댓글이 없습니다.</h3></div>
 
-<div th:unless="${commets.isEmpty()}" th:each="comment: ${commets}">
+<div th:unless="${comments.isEmpty()}" th:each="comment: ${comments}">
   <div>
     <h5>익명</h5>
     <div>
-      <form th:action="@{/article/{aId}/comment/{cId}/delete(aId=${article.id},cId=${comment.id})}" method="post">
+      <form th:action="@{'/articles/'+${article.id}+'/comments/'+${comment.id}+'/delete'}" method="post">
+<!--      <form th:action="@{/article/{aId}/comment/{cId}/delete(aId=${article.id},cId=${comment.id})}" method="post">-->
         <input type="password" name="password" placeholder="비밀번호">
         <input type="submit" value="삭제하기">
       </form>

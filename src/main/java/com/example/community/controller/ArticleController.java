@@ -1,8 +1,6 @@
 package com.example.community.controller;
 
 import com.example.community.dto.ArticleDto;
-import com.example.community.dto.CommentDto;
-import com.example.community.repository.CommentRepository;
 import com.example.community.repository.EnterRepository;
 import com.example.community.service.ArticleService;
 import com.example.community.service.CommentService;
@@ -10,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/articles")
@@ -50,7 +46,7 @@ public class ArticleController {
           Model model
   ){
           model.addAttribute("article", articleService.readArticle(id));
-          model.addAttribute("commets", commentService.readComments(id));
+          model.addAttribute("comments", commentService.readComments(id));
           return "/article/read";
   }
   @PostMapping("/{articleId}/delete")

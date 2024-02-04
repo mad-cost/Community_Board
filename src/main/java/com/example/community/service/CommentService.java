@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -38,4 +39,13 @@ public class CommentService {
 
   }
 
+  public void deleteComment(Long commentId, String password){
+    Comment comment = commentRepository.findById(commentId)
+            .orElseThrow(() -> new NoSuchElementException("삭제할 댓글이 존재하지 않습니다."));
+
+    if (!comment.getPassword().equals(password)){
+      throw new IllegalStateException("댓글의 비밀번호가 일치하지 않습니다.");
+    }
+    commentRepository.deleteById(commentId);
+  }
 }
