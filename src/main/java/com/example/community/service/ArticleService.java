@@ -28,9 +28,9 @@ public class ArticleService {
 
   public List<ArticleDto> readArticleEnterIdDesc(Long enterId){
     List<ArticleDto> articles = new ArrayList<>();
-   for (Article article : articleRepository.findByEnterIdOrderByIdDesc(enterId)){
-    articles.add(ArticleDto.from(article));
-   }
+    for (Article article : articleRepository.findByEnterIdOrderByIdDesc(enterId)){
+      articles.add(ArticleDto.from(article));
+    }
     return articles;
   }
 

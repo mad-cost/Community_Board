@@ -35,8 +35,8 @@ public class ArticleController {
           @RequestParam("enter-id")
           Long enterId
   ){
-          ArticleDto newId = articleService.create(title, content, password, enterId);
-          return "redirect:/articles/" + newId.getId();
+    ArticleDto newId = articleService.create(title, content, password, enterId);
+    return "redirect:/articles/" + newId.getId();
   }
 
   @GetMapping("/{articleId}")
@@ -45,9 +45,9 @@ public class ArticleController {
           Long articleId,
           Model model
   ){
-          model.addAttribute("article", articleService.readArticle(articleId));
-          model.addAttribute("comments", commentService.readComments(articleId));
-          return "/article/read";
+    model.addAttribute("article", articleService.readArticle(articleId));
+    model.addAttribute("comments", commentService.readComments(articleId));
+    return "/article/read";
   }
   @PostMapping("/{articleId}/delete")
   public String deleteArticle(
@@ -66,10 +66,10 @@ public class ArticleController {
           Long articleId,
           Model model
   ){
-          model.addAttribute("article", articleService.readArticle(articleId));
-          model.addAttribute("enters", enterRepository.findAll());
+    model.addAttribute("article", articleService.readArticle(articleId));
+    model.addAttribute("enters", enterRepository.findAll());
 
-          return "article/edit";
+    return "article/edit";
   }
 
   @PostMapping("/{articleId}/update")
@@ -85,7 +85,7 @@ public class ArticleController {
           @RequestParam("enter-id")
           Long enterId
   ){
-          articleService.update(articleId, title, content, password, enterId);
-          return "redirect:/articles/" + articleId;
+    articleService.update(articleId, title, content, password, enterId);
+    return "redirect:/articles/" + articleId;
   }
 }

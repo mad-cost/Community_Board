@@ -30,22 +30,16 @@ public class CommentService {
           String content,
           String password
   ){
-    Article article = articleRepository.findById(id).orElseThrow();
       Comment comment = new Comment(content, password, id);
       Comment commentSaved = commentRepository.save(comment);
-
       return CommentDto.from(commentSaved);
-
-
   }
 
-  public void deleteComment(Long commentId, String password){
+  public void deleteComment(Long commentId, String password) {
     Comment comment = commentRepository.findById(commentId)
-            .orElseThrow(() -> new NoSuchElementException("삭제할 댓글이 존재하지 않습니다."));
-
-    if (!comment.getPassword().equals(password)){
-      throw new IllegalStateException("댓글의 비밀번호가 일치하지 않습니다.");
+            .orElseThrow();
+    if (comment.getPassword().equals(password)) {
+      commentRepository.delete(comment);
     }
-    commentRepository.deleteById(commentId);
   }
 }
