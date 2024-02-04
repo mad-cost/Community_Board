@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>수정하기: [[${article.title}]]</title>
+</head>
+<body>
+<div>
+  <h1>게시글 수정</h1>
+  <a th:href="@{'/articles/'+${article.id}}">뒤로가기</a>
+</div>
+<hr>
+<form th:action="@{'/articles/'+${article.id}+'/update'}" method="post">
+  <div>
+    <label for="title-input">Title</label>
+    <input type="text" name="title" id="title-input" th:value="${article.title}">
+  </div>
+  <div>
+    <label for="content-area">Content</label>
+    <textarea name="content" id="content-area">[[${article.content}]]</textarea>
+  </div>
+  <div>
+    <label for="password-input">Password</label>
+    <input type="password" name="password" id="password-input">
+  </div>
+  <div>
+    <label for="enter-select">Select</label>
+    <select name="enter-id" id="enter-select">
+      <option disabled selected>소속사</option>
+      <option th:each="enter: ${enters}" th:value="${enter.id}" th:text="${enter.name}"></option>
+    </select>
+  </div>
+  <input type="submit" value="Write">
+</form>
+</body>
+</html>

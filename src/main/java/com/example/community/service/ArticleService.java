@@ -46,9 +46,9 @@ public class ArticleService {
     return ArticleDto.from(articleRepository.save(article));
   }
 
-  public ArticleDto readArticle(Long id){
-    return ArticleDto.from(articleRepository.findById(id)
-            .orElseThrow());
+  public ArticleDto readArticle(Long articleId){
+    return ArticleDto.from(articleRepository.findById(articleId)
+            .orElseThrow(() -> new NoSuchElementException("게시글이 존재하지 않습니다 articleId = " + articleId)));
   }
 
   public void delete(Long id, String password){
@@ -57,5 +57,23 @@ public class ArticleService {
     if (article.getPassword().equals(password)){
       articleRepository.delete(article);
     }
+  }
+
+  public void update(
+          Long articleId,
+          String title,
+          String content,
+          String password,
+          Long enterId){
+    Article article = articleRepository.findById(articleId)
+            .orElseThrow(() -> new NoSuchElementException("게시글을 찾을수가 없습니다."));
+    if (article.getPassword().equals(password)){
+      article.setTitle(title);
+      article.setContent(content);
+      Enter enter = enterRepository.findById(enterId)
+              .orElseThrow();
+      article.setEnter(enter);
+    }
+    ArticleDto.from(articleRepository.save(article));
   }
 }

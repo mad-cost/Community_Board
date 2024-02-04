@@ -42,11 +42,11 @@ public class ArticleController {
   @GetMapping("/{articleId}")
   public String readArticle(
           @PathVariable("articleId")
-          Long id,
+          Long articleId,
           Model model
   ){
-          model.addAttribute("article", articleService.readArticle(id));
-          model.addAttribute("comments", commentService.readComments(id));
+          model.addAttribute("article", articleService.readArticle(articleId));
+          model.addAttribute("comments", commentService.readComments(articleId));
           return "/article/read";
   }
   @PostMapping("/{articleId}/delete")
@@ -60,5 +60,32 @@ public class ArticleController {
     return "redirect:/enters";
   }
 
+  @GetMapping("/{articleId}/edit")
+  public String editArticle(
+          @PathVariable("articleId")
+          Long articleId,
+          Model model
+  ){
+          model.addAttribute("article", articleService.readArticle(articleId));
+          model.addAttribute("enters", enterRepository.findAll());
 
+          return "article/edit";
+  }
+
+  @PostMapping("/{articleId}/update")
+  public String updateArticle(
+          @PathVariable("articleId")
+          Long articleId,
+          @RequestParam("title")
+          String title,
+          @RequestParam("content")
+          String content,
+          @RequestParam("password")
+          String password,
+          @RequestParam("enter-id")
+          Long enterId
+  ){
+          articleService.update(articleId, title, content, password, enterId);
+          return "redirect:/articles/" + articleId;
+  }
 }
