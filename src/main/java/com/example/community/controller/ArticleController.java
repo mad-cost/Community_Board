@@ -47,7 +47,7 @@ public class ArticleController {
   ){
     model.addAttribute("article", articleService.readArticle(articleId));
     model.addAttribute("comments", commentService.readComments(articleId));
-    return "/article/read";
+    return "article/read";
   }
   @PostMapping("/{articleId}/delete")
   public String deleteArticle(
