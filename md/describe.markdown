@@ -1,5 +1,5 @@
 ## 간략히 보기 👀
-* 왼쪽 - AWS E2C를 이용한 서버
+* 왼쪽 - AWS EC2를 이용한 서버
 * 오른쪽 - SpringBoot를 이용한 port 8080 서버
 ![E2C연결](/img/num1.png)
 <hr>
